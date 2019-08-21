@@ -6,15 +6,15 @@ public class AdivinaElNumero {
     private boolean juegoActivo = true;
 
     public void jugar() {
-        System.out.println("Hola, ¿cuál es tu nombre?");
-        String nombreJugador = entrada.nextLine();
-        System.out.printf("Bienvenido %s, vamos a comenzar\n", nombreJugador);
+
+        String nombreJugador = obtenerNombreJugador();
+
 
         while (juegoActivo) {
             int intentos = 0;
             int min = 0;
             int max = 20;
-            int numeroJuego = (int) (Math.random() * ((max - min) + 1));
+            int numeroJuego = obtenerNumeroAleatorio(1, 20);
 
 
             System.out.printf("%s he escogido un número entre %d y %d, adivínalo\n", nombreJugador, min, max);
@@ -22,14 +22,8 @@ public class AdivinaElNumero {
 
 
             do {
-                System.out.println("Escoge un número");
-                numeroJugador = entrada.nextInt();
-
-                if (numeroJuego < numeroJugador) {
-                    System.out.println("Muy alto, adivina otra vez");
-                } else if (numeroJuego > numeroJugador) {
-                    System.out.println("Muy bajo, adivina otra vez");
-                }
+                numeroJugador = escogerNumero();
+                mensaje(numeroJuego, numeroJugador);
                 intentos++;
 
             } while (numeroJuego != numeroJugador);
@@ -39,5 +33,29 @@ public class AdivinaElNumero {
             juegoActivo = false;
         }
 
+    }
+
+    private int obtenerNumeroAleatorio(int min, int max) {
+        return min + (int) (Math.random() * ((max - min) + 1));
+    }
+
+    private String obtenerNombreJugador() {
+        System.out.println("Hola, ¿cuál es tu nombre?");
+        String nombreJugador = entrada.nextLine();
+        System.out.printf("Bienvenido %s, vamos a comenzar\n", nombreJugador);
+        return nombreJugador;
+    }
+
+    private int escogerNumero() {
+        System.out.println("Escoge un número");
+        return entrada.nextInt();
+    }
+
+    private void mensaje(int numeroJuego, int numeroJugador){
+        if (numeroJuego < numeroJugador) {
+            System.out.println("Muy alto, adivina otra vez");
+        } else if (numeroJuego > numeroJugador) {
+            System.out.println("Muy bajo, adivina otra vez");
+        }
     }
 }

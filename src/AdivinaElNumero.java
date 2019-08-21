@@ -30,7 +30,7 @@ public class AdivinaElNumero {
 
             System.out.printf("Has ganado, intentos %d", intentos);
 
-            juegoActivo = false;
+            juegoActivo = jugarNuevamente();
         }
 
     }
@@ -56,6 +56,18 @@ public class AdivinaElNumero {
             System.out.println("Muy alto, adivina otra vez");
         } else if (numeroJuego > numeroJugador) {
             System.out.println("Muy bajo, adivina otra vez");
+        }
+    }
+
+    public boolean jugarNuevamente() {
+        System.out.println("¿Jugar nuevamente?\n 1. Sí\n 2. No");
+        int respuesta = entrada.nextInt();
+        if (respuesta == 1){
+            System.out.println("¡Genial!. Juguemos otra vez!");
+            return true;
+        } else{
+            System.out.println("Fin del juego, ¡gracias por participar!");
+            return false;
         }
     }
 }
